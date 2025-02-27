@@ -1,57 +1,42 @@
 package fa.training.entities;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Book extends Publication {
 
 	private String isbn;
-	private Set<String> authors;
-	private String publicationPlace;
+    private Set<String> authors;
+    private String publicationPlace;
 
-	@Override
-	public void display() {
-		System.out.println("Book Information:");
-		System.out.println("Publication Year: " + getPublicationYear());
-		System.out.println("Publisher: " + getPublisher());
-		System.out.println("Publication Date: " + getPublicationDate());
-		System.out.println("ISBN: " + isbn);
-		System.out.println("Authors: " + String.join(", ", authors));
-		System.out.println("Publication Place: " + publicationPlace);
-	}
+    public Book(int publicationYear, String publisher, LocalDate publicationDate, String isbn, String publicationPlace) {
+        super(publicationYear, publisher, publicationDate);
+        this.isbn = isbn;
+        this.publicationPlace = publicationPlace;
+        this.authors = new HashSet<>();
+    }
 
-	public Book() {
-	}
+    public void addAuthor(String author) {
+        if (authors.contains(author)) {
+            System.out.println("Author existed");
+        } else {
+            authors.add(author);
+            System.out.println("Add successfully");
+        }
+    }
 
-	public Book(int publicationYear, String publisher, String publicationDate, String isbn, Set<String> authors,
-			String publicationPlace) {
-		super(publicationYear, publisher, publicationDate);
-		this.isbn = isbn;
-		this.authors = authors;
-		this.publicationPlace = publicationPlace;
-	}
+    public String getIsbn() {
+        return isbn;
+    }
 
-	public String getIsbn() {
-		return isbn;
-	}
+    public Set<String> getAuthors() {
+        return authors;
+    }
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-
-	public Set<String> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(Set<String> authors) {
-		this.authors = authors;
-	}
-
-	public String getPublicationPlace() {
-		return publicationPlace;
-	}
-
-	public void setPublicationPlace(String publicationPlace) {
-		this.publicationPlace = publicationPlace;
-	}
+    @Override
+    public void display() {
+        System.out.println("Book: ISBN=" + isbn + ", Publisher=" + publisher + ", Year=" + publicationYear + ", Authors=" + authors + ", Place=" + publicationPlace);
+    }
 
 }
